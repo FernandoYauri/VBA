@@ -1,0 +1,36 @@
+'Macros para crear base de datos en Excel
+Sub DATOS()
+
+Dim uf As Integer
+i = 0
+For i = 0 To 51 Step 2
+Worksheets("TD DIARIO").Select
+Range("B7:D94").Copy
+Worksheets("DATA MENSUAL").Select
+uf = ActiveSheet.Cells(Rows.Count, "B").End(xlUp).Row
+Cells(uf + 1, 2).PasteSpecial xlPasteValues
+
+Worksheets("TD DIARIO").Select
+Range("E7:F94").Offset(, i).Copy
+Worksheets("DATA MENSUAL").Select
+uf = ActiveSheet.Cells(Rows.Count, "E").End(xlUp).Row
+Cells(uf + 1, 5).PasteSpecial xlPasteValues
+
+'PARA EL MES
+Worksheets("TD DIARIO").Activate
+Range("E4").Offset(, i).Copy
+Worksheets("DATA MENSUAL").Activate
+uf = ActiveSheet.Cells(Rows.Count, "G").End(xlUp).Row
+Range(Cells(uf + 1, 7), Cells(uf + 88, 7)).PasteSpecial xlPasteValues
+
+'Para el año
+Worksheets("TD DIARIO").Activate
+Range("E5").Offset(, i).Copy
+Worksheets("DATA MENSUAL").Activate
+uf = ActiveSheet.Cells(Rows.Count, "H").End(xlUp).Row
+Range(Cells(uf + 1, 8), Cells(uf + 88, 8)).PasteSpecial xlPasteValues
+
+Application.CutCopyMode = False
+
+Next
+end sub
